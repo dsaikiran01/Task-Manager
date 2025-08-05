@@ -76,6 +76,39 @@ app.get('/tasks', verifyToken, (req, res) => {
 });
 
 
+// DELETE /tasks/:id
+app.delete('/tasks/:id', verifyToken, (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const task = tasks.find(t => t.id === taskId);
+
+  if (!task) return res.status(404).json({ message: 'Task not found' });
+
+  if (req.user.role !== 'admin' && task.owner !== req.user.username) {
+    return res.status(403).json({ message: 'Not authorized' });
+  }
+
+  const index = tasks.findIndex(t => t.id === taskId);
+  tasks.splice(index, 1);
+  res.json({ message: 'Task deleted' });
+});
+
+
+// PUT /tasks/:id
+app.put('/tasks/:id', verifyToken, (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const task = tasks.find(t => t.id === taskId);
+
+  if (!task) return res.status(404).json({ message: 'Task not found' });
+
+  if (req.user.role !== 'admin' && task.owner !== req.user.username) {
+    return res.status(403).json({ message: 'Not authorized' });
+  }
+
+  task.title = req.body.title || task.title;
+  res.json(task);
+});
+
+
 // server start
 
 const PORT = process.env.PORT || 5000;
