@@ -6,6 +6,8 @@ import AdminPanel from './pages/AdminPanel';
 import UserTasks from './pages/UserTasks';
 import { AuthProvider, AuthContext } from './auth/AuthContext';
 import PrivateRoute from './auth/PrivateRoute';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
 
 function RoleBasedRoute() {
   const { auth } = useContext(AuthContext);
@@ -16,6 +18,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -23,7 +26,8 @@ function App() {
             path="/"
             element={
               <PrivateRoute>
-                <RoleBasedRoute />
+                {/* <RoleBasedRoute /> */}
+                <Home />
               </PrivateRoute>
             }
           />
