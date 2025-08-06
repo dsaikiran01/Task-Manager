@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  backend:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://dsk-atlas-user:eIDpgEL8HoQDdFq0@cluster-atlas.jlzgo4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-Atlas
+      - JWT_SECRET=supersecret
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
