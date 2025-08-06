@@ -1,5 +1,4 @@
 import React from 'react';
-import TaskForm from './TaskForm';
 import AdminPanel from './AdminPanel';
 import UserTasks from './UserTasks';
 import { useContext } from 'react';
@@ -11,7 +10,6 @@ const Home = () => {
   return (
     <>
       <h1>Welcome, {auth.user.username}</h1>
-      <TaskForm />
       {auth.user.role === 'admin' ? <AdminPanel /> : <UserTasks />}
     </>
   );

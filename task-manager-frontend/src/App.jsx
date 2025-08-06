@@ -8,6 +8,7 @@ import { AuthProvider, AuthContext } from './auth/AuthContext';
 import PrivateRoute from './auth/PrivateRoute';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 function RoleBasedRoute() {
   const { auth } = useContext(AuthContext);
@@ -28,6 +29,14 @@ function App() {
               <PrivateRoute>
                 {/* <RoleBasedRoute /> */}
                 <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             }
           />

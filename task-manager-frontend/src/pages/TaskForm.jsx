@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../api/axios';
 
-const TaskForm = () => {
+const TaskForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('idle');
 
@@ -12,6 +12,7 @@ const TaskForm = () => {
       setTitle('');
       setStatus('success');
       setTimeout(() => setStatus('idle'), 1000);
+      if (onTaskAdded) onTaskAdded(); // Refresh tasks
     } catch (err) {
       setStatus('error');
     }

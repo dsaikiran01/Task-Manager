@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
+import TaskForm from './TaskForm';
 
 const UserTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -34,6 +35,7 @@ const UserTasks = () => {
   return (
     <div>
       <h2>My Tasks</h2>
+      <TaskForm onTaskAdded={fetchTasks} />
       <ul>
         {tasks.map((task) => (
           <li key={task._id}>

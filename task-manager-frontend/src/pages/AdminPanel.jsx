@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/axios';
+import TaskForm from './TaskForm';
 
 const AdminPanel = () => {
   const [tasks, setTasks] = useState([]);
@@ -34,6 +35,7 @@ const AdminPanel = () => {
   return (
     <div>
       <h2>Admin Panel – All Tasks</h2>
+      <TaskForm onTaskAdded={fetchTasks} />
       <ul>
         {tasks.map((task) => (
           <li key={task._id}>

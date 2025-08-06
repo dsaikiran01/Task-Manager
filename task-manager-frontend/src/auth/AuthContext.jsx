@@ -12,8 +12,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      const decoded = jwtDecode(token);
-      setAuth({ token, user: decoded });
+      try {
+        const decoded = jwtDecode(token);
+        setAuth({ user: decoded, token });
+      } catch (e) {
+        localStorage.removeItem('token'); // token expired or invalid
+      }
     }
   }, []);
 
