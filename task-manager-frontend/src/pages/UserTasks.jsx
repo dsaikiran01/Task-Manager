@@ -21,7 +21,7 @@ const UserTasks = () => {
   };
 
   const startEdit = (task) => {
-    setEditingId(task.id);
+    setEditingId(task._id);
     setEditTitle(task.title);
   };
 
@@ -36,21 +36,21 @@ const UserTasks = () => {
       <h2>My Tasks</h2>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>
-            {editingId === task.id ? (
+          <li key={task._id}>
+            {editingId === task._id ? (
               <>
                 <input
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                 />
-                <button onClick={() => saveEdit(task.id)}>Save</button>
+                <button onClick={() => saveEdit(task._id)}>Save</button>
                 <button onClick={() => setEditingId(null)}>Cancel</button>
               </>
             ) : (
               <>
                 {task.title}
                 <button onClick={() => startEdit(task)}>Edit</button>
-                <button onClick={() => deleteTask(task.id)}>Delete</button>
+                <button onClick={() => deleteTask(task._id)}>Delete</button>
               </>
             )}
           </li>
