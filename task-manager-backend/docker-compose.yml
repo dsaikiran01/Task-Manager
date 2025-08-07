@@ -4,9 +4,8 @@ services:
     build: .
     ports:
       - "5000:5000"
-    environment:
-      - MONGO_URI=mongodb+srv://dsk-atlas-user:eIDpgEL8HoQDdFq0@cluster-atlas.jlzgo4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-Atlas
-      - JWT_SECRET=supersecret
+    env_file:
+      - ./.env
     depends_on:
       - mongo
     volumes:
